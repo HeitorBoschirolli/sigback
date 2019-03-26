@@ -6,7 +6,7 @@ from skimage import img_as_float64
 from sigback.processing import color
 
 
-class ProcessingTest(unittest.TestCase):
+class ColorTest(unittest.TestCase):
     test_data_path = './sigback/processing/tests/data'
 
     def test_binarize(self):
