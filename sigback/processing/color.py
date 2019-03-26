@@ -17,5 +17,6 @@ def remove_background(img, nl=3, method='posterization'):
         raise(Exception('image must be in grayscale'))
     
     bin_img = binarize(img, nl, method)
-    no_bg_img = img[bin_img==1] = 1
+    no_bg_img = img
+    no_bg_img[bin_img==1] = 1
     return no_bg_img
