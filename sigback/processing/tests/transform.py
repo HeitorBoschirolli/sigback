@@ -25,7 +25,7 @@ class ProcessingTest(unittest.TestCase):
             imread(self.test_data_path + '/test_sig_cropped.png')
         )
         actual = transform.barycenter(sig)
-        expected = (192.0, 155.0)
+        expected = (155.0, 192.0)
         self.assertAlmostEquals(actual[0], expected[0], 0.001)
         self.assertAlmostEquals(actual[1], expected[1], 0.001)
 

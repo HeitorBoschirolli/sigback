@@ -17,13 +17,13 @@ def remove_border(img):
 def barycenter(img):
     (num_rows, num_cols) = img.shape
 
-    bc_row = np.round(
+    bc_col = np.round(
         np.sum(
             np.array(range(num_cols)) * np.sum(img, axis=0),
             axis=0
         ) / np.sum(img)
     )
-    bc_col = np.round(
+    bc_row = np.round(
         np.sum(
             np.array(range(num_rows)) * np.sum(img, axis=1),
             axis=0
