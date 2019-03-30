@@ -1,7 +1,5 @@
 import numpy as np
 
-from sigback import processing
-
 
 def blend(sig, sig_barycenter, doc, doc_center):
     n_rows_doc, n_cols_doc = doc.shape
