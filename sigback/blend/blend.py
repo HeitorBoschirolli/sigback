@@ -19,6 +19,9 @@ def blend(sig, sig_barycenter, doc, doc_center):
     sig_end_col = sig_start_col + n_cols_sig
 
     signed_doc = np.copy(doc)
-    signed_doc[sig_start_row:sig_end_row, sig_start_col:sig_end_col] = doc[sig_start_row:sig_end_row, sig_start_col:sig_end_col] * sig
+    signed_doc[
+        sig_start_row:sig_end_row,
+        sig_start_col:sig_end_col
+    ] = doc[sig_start_row:sig_end_row, sig_start_col:sig_end_col] * sig
 
     return signed_doc
