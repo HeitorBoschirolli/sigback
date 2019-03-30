@@ -44,9 +44,6 @@ class BlendTest(unittest.TestCase):
         )
 
         np.testing.assert_almost_equal(expected, actual, 0.001)
-    
-
-
 
 
 if __name__ == "__main__":
