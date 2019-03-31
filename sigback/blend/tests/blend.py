@@ -77,6 +77,8 @@ class BlendTest(unittest.TestCase):
             for path in os.listdir(save_dir)
         ]
         actual_files.sort()
+    
+        assert(len(actual_files) == len(expected_files))
 
         for expected_file, actual_file in zip(expected_files, actual_files):
             expected = img_as_float64(imread(expected_file, as_gray=True))

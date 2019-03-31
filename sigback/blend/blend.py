@@ -53,8 +53,8 @@ def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, seed=None):
     random.shuffle(combined)
     doc_files[:], doc_centers[:] = zip(*combined)
 
-    for id, sig_file in enumerate(sig_files):
-        doc_file = doc_files[id % n_docs]
+    for index, sig_file in enumerate(sig_files):
+        doc_file = doc_files[index % n_docs]
         
         doc = img_as_float64(imread(doc_file, as_gray=True))
         sig = img_as_float64(imread(sig_file, as_gray=True))
@@ -65,7 +65,12 @@ def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, seed=None):
         sig_barycenter = transform.barycenter(sig)
 
         try:
-            blended = blend(sig, sig_barycenter, doc, doc_centers[id % n_docs])
+            blended = blend(
+                sig,
+                sig_barycenter,
+                doc,
+                doc_centers[index % n_docs]
+            )
         except Exception as inst:
             if sig.shape[0] > doc.shape[0] or sig.shape[1] > doc.shape[1]:
                 raise Exception(
