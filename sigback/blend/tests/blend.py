@@ -3,6 +3,7 @@ import unittest
 import os
 import shutil
 from skimage.io import imread
+from skimage.transform import rescale
 from skimage import img_as_float64
 
 from sigback.blend import blend
@@ -52,6 +53,24 @@ class BlendTest(unittest.TestCase):
 
         sig_barycenter = transform.barycenter(sig)
         actual = blend.blend(sig, sig_barycenter, doc, (1215, 1800))
+        expected = img_as_float64(
+            imread(test_data_path + '/big_blended.png', as_gray=True)
+        )
+
+        np.testing.assert_almost_equal(expected, actual, tol)
+
+    def test_blend_biggest_sig(self):
+        doc = img_as_float64(
+            imread(test_data_path + '/test_doc.jpg', as_gray=True)
+        )
+        sig = img_as_float64(
+            imread(test_data_path + '/test_big_sig_cropped.png', as_gray=True)
+        )
+        sig = rescale(sig, 5)
+
+        sig_barycenter = transform.barycenter(sig)
+        actual = blend.blend(sig, sig_barycenter, doc, (1215, 1800))
+
         expected = img_as_float64(
             imread(test_data_path + '/big_blended.png', as_gray=True)
         )
