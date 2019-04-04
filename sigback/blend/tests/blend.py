@@ -13,7 +13,7 @@ from sigback.processing import transform
 rand = str(np.random.randint(10000, 100000))
 test_data_path = './sigback/blend/tests/data'
 save_dir = '/tmp/' + rand + 'sigback_test_file'
-tol = 0.001
+tol = 5
 
 class BlendTest(unittest.TestCase):
 
@@ -41,7 +41,7 @@ class BlendTest(unittest.TestCase):
             imread(test_data_path + '/blended.png', as_gray=True)
         )
 
-        np.testing.assert_almost_equal(expected, actual, tol)
+        np.testing.assert_almost_equal(expected, actual, decimal=tol)
     
     def test_blend_big_sig(self):
         doc = img_as_float64(
@@ -57,7 +57,7 @@ class BlendTest(unittest.TestCase):
             imread(test_data_path + '/big_blended.png', as_gray=True)
         )
 
-        np.testing.assert_almost_equal(expected, actual, tol)
+        np.testing.assert_almost_equal(expected, actual, decimal=tol)
 
     def test_blend_biggest_sig(self):
         doc = img_as_float64(
@@ -72,10 +72,10 @@ class BlendTest(unittest.TestCase):
         actual = blend.blend(sig, sig_barycenter, doc, (1215, 1800))
 
         expected = img_as_float64(
-            imread(test_data_path + '/big_blended.png', as_gray=True)
+            imread(test_data_path + '/biggest_sig_blended.png', as_gray=True)
         )
 
-        np.testing.assert_almost_equal(expected, actual, tol)
+        np.testing.assert_almost_equal(expected, actual, decimal=tol)
     
     def test_blend_dirs(self):
         sigs_dir = os.path.join(test_data_path, 'sigs')
@@ -103,7 +103,7 @@ class BlendTest(unittest.TestCase):
             expected = img_as_float64(imread(expected_file, as_gray=True))
             actual = img_as_float64(imread(actual_file, as_gray=True))
 
-            np.testing.assert_almost_equal(actual, expected, tol)
+            np.testing.assert_almost_equal(actual, expected, decimal=tol)
 
 
 if __name__ == "__main__":
