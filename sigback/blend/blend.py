@@ -67,7 +67,6 @@ def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, seed=None):
         doc = img_as_float64(imread(doc_file, as_gray=True))
         sig = img_as_float64(imread(sig_file, as_gray=True))
 
-        sig = color.binarize(sig)
         sig = color.remove_background(sig)
         sig = transform.remove_border(sig)
         sig_barycenter = transform.barycenter(sig)
