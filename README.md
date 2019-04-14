@@ -11,9 +11,10 @@ run all the test functions available with the `make` command.
 ## Modules
 The library is composed of three modules, two for processing the signature
 images and one for blending it with background images.
-* [color module](###the-color-module)
-* [transform module](###the-transform-module)
-* [blend module](###the-blend-module)
+* [color module](##the-color-module)
+* [transform module](##the-transform-module)
+* [blend module](##the-blend-module)
+* [measure module](##the-measure-module)
 
 ## The color module
 the color module contains functions to binarize and remove the background of a
@@ -287,6 +288,35 @@ doc_centers = list(zip(cy, cx))
 save_dir = '/home/heitor/data/ic/sigver/data/background_utsig/'
 
 blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir)
+```
+
+## the measure module
+The measure module contains functions to measure properties of images, like
+maximum and minimum size.
+
+### minmax
+<hr>
+
+`sigback.processing.measure.minmax`(directory)
+
+Gets the maximum and the minimum number of rows of the images in a given
+directory.
+
+<strong>Parameters</strong><br>
+
+<strong>directory str</strong><br>
+The path to the directory that contains the images. The directory must contain
+only the images.
+
+<strong>use example</strong>
+```python
+from skimage import img_as_float64
+
+from sigback.processing import measure
+
+
+directory = '/tmp/images'
+result = measure.minmax(directory) # result = (150, 300, 100, 200)
 ```
 
 ## References
