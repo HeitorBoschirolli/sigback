@@ -1,5 +1,5 @@
 .PHONY: all
-all: blend color transform
+all: blend color transform measure
 
 .PHONY: blend
 blend:
