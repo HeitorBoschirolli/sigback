@@ -12,3 +12,7 @@ color:
 .PHONY: transform
 transform:
 	python -m sigback.processing.tests.transform
+
+.PHONY: measure
+measure:
+	python -m sigback.processing.tests.measure
