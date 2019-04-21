@@ -157,7 +157,7 @@ class BlendTest(unittest.TestCase):
 
             np.testing.assert_almost_equal(actual, expected, decimal=tol)
 
-    def test_blend_dirs(self):
+    def test_blend_dirs_keep_size(self):
         sigs_dir = os.path.join(test_data_path, 'sigs')
         docs_dir = os.path.join(test_data_path, 'docs')
         doc_centers = [(1215, 1800), (659, 2602)]
