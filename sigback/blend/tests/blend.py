@@ -164,7 +164,7 @@ class BlendTest(unittest.TestCase):
 
         blend.blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, True, 1)
 
-        expecteds_path = os.path.join(test_data_path, 'blended')
+        expecteds_path = os.path.join(test_data_path, 'ks_blended')
         expected_files = [
             os.path.join(expecteds_path, path)
             for path in os.listdir(expecteds_path)
