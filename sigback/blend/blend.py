@@ -8,13 +8,20 @@ from skimage.io import imread, imsave
 from sigback.processing import color, transform
 
 
-def blend(sig, sig_barycenter, doc, doc_center):
+def blend(sig, sig_barycenter, doc, doc_center, keep_size=False):
     if (sig.shape[0] > doc.shape[0]) or (sig.shape[1] > doc.shape[1]):
-        factor = min(
-            float(doc.shape[0]) / sig.shape[0],
-            float(doc.shape[1]) / sig.shape[1]
-        )
-        sig = rescale(sig, round(factor, 3) - 0.001)
+        if (keep_size):
+            factor = max(
+                float(sig.shape[0]) / doc.shape[0],
+                float(sig.shape[1]) / doc.shape[1]
+            )
+            doc = rescale(doc, round(factor, 3) + 0.001)
+        else:
+            factor = min(
+                float(doc.shape[0]) / sig.shape[0],
+                float(doc.shape[1]) / sig.shape[1]
+            )
+            sig = rescale(sig, round(factor, 3) - 0.001)
 
     n_rows_doc, n_cols_doc = doc.shape
     n_rows_sig, n_cols_sig = sig.shape
@@ -30,15 +37,27 @@ def blend(sig, sig_barycenter, doc, doc_center):
     sig_end_row = sig_start_row + n_rows_sig
     sig_end_col = sig_start_col + n_cols_sig
 
-    signed_doc = np.copy(doc)
-    signed_doc[
-        sig_start_row:sig_end_row,
-        sig_start_col:sig_end_col
-    ] = doc[sig_start_row:sig_end_row, sig_start_col:sig_end_col] * sig
+    if (keep_size):
+        signed_doc = doc[
+            sig_start_row:sig_end_row,
+            sig_start_col:sig_end_col] * sig
+    else:
+        signed_doc = np.copy(doc)
+        signed_doc[
+            sig_start_row:sig_end_row,
+            sig_start_col:sig_end_col
+        ] = doc[sig_start_row:sig_end_row, sig_start_col:sig_end_col] * sig
 
     return signed_doc
 
-def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, seed=None):
+def blend_dirs(
+        sigs_dir,
+        docs_dir,
+        doc_centers,
+        save_dir,
+        keep_size=False,
+        seed=None
+    ):
     sig_files = os.listdir(sigs_dir)
     doc_files = sorted(os.listdir(docs_dir))
 
@@ -68,9 +87,16 @@ def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, seed=None):
         sig = img_as_float64(imread(sig_file, as_gray=True))
 
         sig = color.remove_background(sig)
-        sig = transform.remove_border(sig)
+        if (not keep_size):
+            sig = transform.remove_border(sig)
         sig_barycenter = transform.barycenter(sig)
-        blended = blend(sig, sig_barycenter, doc, doc_centers[index % n_docs])
+        blended = blend(
+            sig,
+            sig_barycenter,
+            doc,
+            doc_centers[index % n_docs],
+            keep_size
+        )
 
         sig_name = os.path.split(sig_file)[-1]
         blended_file = os.path.join(save_dir, sig_name)

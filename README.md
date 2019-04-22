@@ -159,7 +159,8 @@ another directory.
 ### blend
 <hr>
 
-`sigback.blend.blend.blend`(sig, sig_barycenter, doc, doc_center)
+`sigback.blend.blend.blend`(sig, sig_barycenter, doc, doc_center,
+keep_size=False)
 
 Blends a signature image to a background image.
 
@@ -184,6 +185,10 @@ if the background image is of a document, otherwise `(0, 0)` can be passed to
 this parameter and the images will be blended ignoring the position of the
 signature on the background.
 
+<strong>keep_size</strong><br>
+If `True` the blended signature will be of the same size as the source
+signature. 
+
 <strong>use example</strong>
 ``` python
 from skimage.io import imread
@@ -206,7 +211,7 @@ blended_no_placement = blend.blend(sig, (0, 0), background, (0, 0))
 <hr>
 
 `sigback.blend.blend.blend_dirs`(sigs_dir, docs_dir, doc_centers, save_dir,
-seed=None)
+keep_size=False, seed=None)
 
 Blends all signatures from a directory with the backgrounds on another directory.
 
@@ -226,6 +231,10 @@ documents would be if they were sorted alphabetically
 
 <strong>save_dir str</strong><br>
 The path to the directory in which the blended images will be saved.
+
+<strong>keep_size bool</strong><br>
+If `True` the blended signature will be of the same size as the source
+signature. This will be applied to all signatures in the source directory.
 
 <strong>seed int</strong><br>
 Used to randomly shuffle the signatures, should be only used for testing or
