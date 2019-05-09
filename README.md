@@ -185,7 +185,7 @@ if the background image is of a document, otherwise `(0, 0)` can be passed to
 this parameter and the images will be blended ignoring the position of the
 signature on the background.
 
-<strong>keep_size</strong><br>
+<strong>keep_size bool</strong><br>
 If `True` the blended signature will be of the same size as the source
 signature. 
 
