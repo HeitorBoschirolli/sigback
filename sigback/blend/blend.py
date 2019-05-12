@@ -10,7 +10,7 @@ from sigback.processing import color, transform
 
 def blend(sig, sig_barycenter, doc, doc_center, keep_size=False):
     if (sig.shape[0] > doc.shape[0]) or (sig.shape[1] > doc.shape[1]):
-        if (keep_size):
+        if keep_size:
             factor = max(
                 float(sig.shape[0]) / doc.shape[0],
                 float(sig.shape[1]) / doc.shape[1]
@@ -37,7 +37,7 @@ def blend(sig, sig_barycenter, doc, doc_center, keep_size=False):
     sig_end_row = sig_start_row + n_rows_sig
     sig_end_col = sig_start_col + n_cols_sig
 
-    if (keep_size):
+    if keep_size:
         signed_doc = doc[
             sig_start_row:sig_end_row,
             sig_start_col:sig_end_col] * sig
@@ -50,14 +50,9 @@ def blend(sig, sig_barycenter, doc, doc_center, keep_size=False):
 
     return signed_doc
 
-def blend_dirs(
-        sigs_dir,
-        docs_dir,
-        doc_centers,
-        save_dir,
-        keep_size=False,
-        seed=None
-    ):
+
+def blend_dirs(sigs_dir, docs_dir, doc_centers, save_dir, keep_size=False,
+               seed=None):
     sig_files = os.listdir(sigs_dir)
     doc_files = sorted(os.listdir(docs_dir))
 
@@ -74,7 +69,7 @@ def blend_dirs(
             number of documents
             '''
         )
-    
+
     random.seed(seed)
     combined = list(zip(doc_files, doc_centers))
     random.shuffle(combined)
@@ -82,12 +77,12 @@ def blend_dirs(
 
     for index, sig_file in enumerate(sig_files):
         doc_file = doc_files[index % n_docs]
-        
+
         doc = img_as_float64(imread(doc_file, as_gray=True))
         sig = img_as_float64(imread(sig_file, as_gray=True))
 
         sig = color.remove_background(sig)
-        if (not keep_size):
+        if not keep_size:
             sig = transform.remove_border(sig)
         sig_barycenter = transform.barycenter(sig)
         blended = blend(

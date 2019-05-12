@@ -1,5 +1,4 @@
 import numpy as np
-from skimage.filters import threshold_otsu
 
 
 def binarize(img, nl=3, method='posterization'):
@@ -18,5 +17,5 @@ def remove_background(img, nl=3, method='posterization'):
     
     bin_img = binarize(img, nl, method)
     no_bg_img = img
-    no_bg_img[bin_img==1] = 1
+    no_bg_img[bin_img == 1] = 1
     return no_bg_img
