@@ -1,4 +1,3 @@
-import numpy as np
 import os
 from skimage.io import imread
 from skimage import img_as_float64

@@ -30,4 +30,4 @@ def barycenter(img):
         ) / np.sum(img)
     )
 
-    return (bc_row, bc_col)
+    return bc_row, bc_col
