@@ -5,16 +5,19 @@ with open('README.md') as f:
 
 setuptools.setup(
     name='sigback',
-    version='0.0.1',
+    version='0.1.0',
     description='Process and add background to signature images',
     long_description=long_description,
-    licence='MIT',
+    long_description_content_type='text/markdown',
+    url='https://github.com/HeitorBoschirolli/sigback',
     author='Heitor Boschirolli',
     author_email='heitor.boschirolli@gmail.com',
-    url='https://github.com/pypa/sampleproject',
-    packages=['blend', 'processing'],
-    install_requires=[
-        'scikit-learn',
-        'numpy',
-    ]
+    license='MIT',
+    classifiers=[
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7'
+    ],
+    packages=['sigback', 'blend', 'processing'],
+    include_package_data=False,
+    install_requires=['scikit-learn', 'numpy']
 )

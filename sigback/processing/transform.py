@@ -3,10 +3,10 @@ import numpy as np
 
 def remove_border(img):
     neg_img = 1 - img
-    
+
     pixels_on_col = np.sum(neg_img, axis=0)
     cols = np.nonzero(pixels_on_col > 0)[0]
-    
+
     pixels_on_row = np.sum(neg_img, axis=1)
     rows = np.nonzero(pixels_on_row)[0]
 

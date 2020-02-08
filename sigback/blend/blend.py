@@ -33,7 +33,7 @@ def blend(sig, sig_barycenter, doc, doc_center, keep_size=False):
         sig_start_row = n_rows_doc - n_rows_sig
     if (sig_start_col + n_cols_sig > n_cols_doc) or (sig_start_col < 0):
         sig_start_col = n_cols_doc - n_cols_sig
-    
+
     sig_end_row = sig_start_row + n_rows_sig
     sig_end_col = sig_start_col + n_cols_sig
 
